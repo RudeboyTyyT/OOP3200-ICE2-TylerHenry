@@ -9,10 +9,6 @@
 
 #include <iostream> 		// cin, cout
 #include <iomanip>			// fixed, setprecision()
-#include <sstream> 			// stringstream
-#include <cmath>			// sqrt()
-#include <limits>			// INT_MAX
-#include <stdexcept>		// out_of_range
 #include "MyConsoleInput.h" // ConsoleInput::ReadInteger()
 #include "CartesianPoint.h"
 

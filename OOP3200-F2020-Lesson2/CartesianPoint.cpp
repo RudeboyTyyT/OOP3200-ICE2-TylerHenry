@@ -10,6 +10,8 @@ CartesianPoint::CartesianPoint(int x, int y)
 	SetPoint(x, y);
 }
 
+CartesianPoint::~CartesianPoint()
+= default;
 void CartesianPoint::SetPoint(int x, int y)
 {
 	SetX(x);
@@ -18,37 +20,37 @@ void CartesianPoint::SetPoint(int x, int y)
 
 void CartesianPoint::SetX(int x)
 {
-	myX = x;
+	m_x = x;
 }
 
 void CartesianPoint::SetY(int y)
 {
-	myY = y;
+	m_y = y;
 }
 
 int CartesianPoint::GetX()
 {
-	return myX;
+	return m_x;
 }
 
 int CartesianPoint::GetY()
 {
-	return myY;
+	return m_y;
 }
 
 
 /** GetDistanceTo Method for CartesianPoint class
 *	Determines the distance between this point and a second point.
-*	@param	pointTo: CartesianPoint
+*	@param	point_to: CartesianPoint
 *	@return	the distance as a double
 */
-double CartesianPoint::GetDistanceTo(CartesianPoint pointTo) const
+double CartesianPoint::GetDistanceTo(CartesianPoint point_to) const
 {
 	// difference between x values
-	int xDelta = pointTo.myX - myX;
+	int xDelta = point_to.m_x - m_x;
 
 	// difference between y values
-	int yDelta = pointTo.myY - myY;
+	int yDelta = point_to.m_y - m_y;
 
 	// return the formula (based on Pythagorean theorem)
 	return sqrt((xDelta * xDelta) + (yDelta * yDelta));
@@ -65,7 +67,7 @@ std::string CartesianPoint::ToString() const
 	std::stringstream strOut;
 
 	// build the string
-	strOut << "(" << myX << ", " << myY << ")";
+	strOut << "(" << m_x << ", " << m_y << ")";
 
 	// return the string
 	return strOut.str();
