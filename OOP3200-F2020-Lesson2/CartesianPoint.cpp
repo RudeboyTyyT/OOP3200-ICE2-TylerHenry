@@ -1,13 +1,12 @@
 #include "CartesianPoint.h"
-
 #include <sstream> 			// stringstream
 #include <cmath>			// sqrt()
 // Class definition section
 
 // constructor for CartesianPoint
-CartesianPoint::CartesianPoint(int x, int y)
+CartesianPoint::CartesianPoint(const int x,  const int y): m_x(x), m_y(y)
 {
-	SetPoint(x, y);
+	//SetPoint(x, y);
 }
 
 CartesianPoint::~CartesianPoint()
@@ -21,8 +20,8 @@ CartesianPoint::CartesianPoint(const CartesianPoint & point2)
 CartesianPoint CartesianPoint::operator+(const CartesianPoint& point2) const
 {
 	CartesianPoint tempPoint;
-	tempPoint.SetX(GetX() + point2.GetX());
-	tempPoint.SetY(GetY() + point2.GetY());
+	tempPoint.SetX((*this).GetX() + point2.GetX());
+	tempPoint.SetY((*this).GetY() + point2.GetY());
 
 	return tempPoint;
 }
@@ -30,10 +29,10 @@ CartesianPoint CartesianPoint::operator+(const CartesianPoint& point2) const
 double CartesianPoint::operator-(const CartesianPoint& point_to) const
 {
 	// difference between x values
-	const int xDelta = point_to.m_x - m_x;
+	const int xDelta = point_to.GetX() - m_x;
 
 	// difference between y values
-	const int yDelta = point_to.m_y - m_y;
+	const int yDelta = point_to.GetY() - m_y;
 
 	// return the formula (based on Pythagorean theorem)
 	return sqrt((xDelta * xDelta) + (yDelta * yDelta));
@@ -42,6 +41,21 @@ double CartesianPoint::operator-(const CartesianPoint& point_to) const
 bool CartesianPoint::operator==(const CartesianPoint& other_point) const
 {
 	return ((GetX() == other_point.GetX()) && (GetY() == other_point.GetY()));
+}
+
+std::ostream& operator<<(std::ostream& out, const CartesianPoint& point)
+{
+	out << point.ToString();
+	return out;
+}
+
+std::istream& operator>>(std::istream& in, CartesianPoint& point)
+{
+	in >> point.m_x;
+	in.ignore();
+	in >> point.m_y;
+
+	return in;
 }
 
 void CartesianPoint::SetPoint(int x, int y)
@@ -76,13 +90,13 @@ int CartesianPoint::GetY() const
 *	@param	point_to: CartesianPoint
 *	@return	the distance as a double
 */
-double CartesianPoint::GetDistanceTo(CartesianPoint& point_to) const
+double CartesianPoint::GetDistanceTo(const CartesianPoint& point_to) const
 {
 	// difference between x values
-	const int xDelta = point_to.m_x - m_x;
+	const int xDelta = point_to.GetX() - m_x;
 
 	// difference between y values
-	const int yDelta = point_to.m_y - m_y;
+	const int yDelta = point_to.GetY() - m_y;
 
 	// return the formula (based on Pythagorean theorem)
 	return sqrt((xDelta * xDelta) + (yDelta * yDelta));
@@ -104,3 +118,5 @@ std::string CartesianPoint::ToString() const
 	// return the string
 	return strOut.str();
 }
+
+
