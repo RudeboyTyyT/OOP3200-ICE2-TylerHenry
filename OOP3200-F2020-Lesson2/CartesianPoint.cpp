@@ -13,6 +13,20 @@ CartesianPoint::CartesianPoint(int x, int y)
 CartesianPoint::~CartesianPoint()
 = default;
 
+CartesianPoint::CartesianPoint(const CartesianPoint & point2)
+{
+	SetPoint(point2.GetX(), point2.GetY());
+}
+
+CartesianPoint CartesianPoint::operator+(const CartesianPoint& point2) const
+{
+	CartesianPoint tempPoint;
+	tempPoint.SetX(GetX() + point2.GetX());
+	tempPoint.SetY(GetY() + point2.GetY());
+
+	return tempPoint;
+}
+
 double CartesianPoint::operator-(const CartesianPoint& point_to) const
 {
 	// difference between x values
@@ -23,6 +37,11 @@ double CartesianPoint::operator-(const CartesianPoint& point_to) const
 
 	// return the formula (based on Pythagorean theorem)
 	return sqrt((xDelta * xDelta) + (yDelta * yDelta));
+}
+
+bool CartesianPoint::operator==(const CartesianPoint& other_point) const
+{
+	return ((GetX() == other_point.GetX()) && (GetY() == other_point.GetY()));
 }
 
 void CartesianPoint::SetPoint(int x, int y)
