@@ -27,6 +27,8 @@ public:
 	double operator-(const CartesianPoint& point_to) const;
 	bool operator==(const CartesianPoint& other_point) const;
 
+	CartesianPoint operator=(const CartesianPoint& newPoint);
+
 	/* friend overloads */
 	friend std::ostream& operator<<(std::ostream& out, const CartesianPoint& point);
 	friend std::istream& operator>>(std::istream& in, CartesianPoint& point);
